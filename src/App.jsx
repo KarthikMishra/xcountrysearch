@@ -12,7 +12,7 @@ const App = () => {
 
   const fetchCountries = async () => {
     try {
-      const response = await axios.get("https://restcountries.com/v3.1/all");
+      const response = await axios.get("https://countries-search-data-prod-812920491762.asia-south1.run.app/countries");
       setCountries(response.data);
     } catch (error) {
       console.error("something is wrong", error);
@@ -20,7 +20,7 @@ const App = () => {
   };
 
   const filteredCountries = countries.filter((country) =>
-    country.name.common.toLowerCase().includes(search.toLowerCase())
+    country.common.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -36,13 +36,13 @@ const App = () => {
       <div className="countryGrid">
         {filteredCountries.map((country) => {
           return (
-            <div key={country.cca3} className="countryCard">
+            <div className="countryCard">
               <img
-                src={country.flags.png}
-                alt={country.name.common}
+                src={country.png}
+                alt={country.common}
                 className="flag"
               />
-              <p className="countryName">{country.name.common}</p>
+              <p className="countryName">{country.common}</p>
             </div>
           );
         })}
